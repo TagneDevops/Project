@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+<main id="main" class="main">
+    <div class="mb-3 row">
+        <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="username" placeholder="name">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+        <input type="text"  class="form-control-plaintext" id="staticEmail" value="email@example.com">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputPassword">
+        </div>
+    </div>
+    <div class="col-auto">
+        <button type="reset" class="btn btn-info mb-3">Annuler </button>
+        <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+    </div>
+</main>
+      {% endblock content %}
+      {% block javascripts %}
+        
+      {% endblock javascripts %}

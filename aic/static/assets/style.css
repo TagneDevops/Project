@@ -1,0 +1,10 @@
+.card {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Couleur et animation lors du survol */
+.card:hover {
+transform: scale(1.05) !important; /* Agrandit légèrement la carte */
+background-color: #f0f8ff !important; /* Change la couleur de fond */
+}

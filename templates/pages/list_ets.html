@@ -1,0 +1,209 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+{% block extrastyle %}
+<style>
+    i:hover{
+        color: red;
+    }
+</style>
+{% endblock extrastyle %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Liste des Etablissements</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item "><a href="{% url "index" %}">Accueil</a></li>
+          <li class="breadcrumb-item active">liste des etablissements</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Etablissements</h5>
+                {% comment %} <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p> {% endcomment %}
+
+
+
+                <div class="d-flex justify-content-end p-2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fullscreenModal"><i class="bi bi-plus"></i>Ajouter</button>
+                </div>
+
+                <div id="messageContainer">
+
+                </div>
+
+                {% if message == "failed" %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Une erreur c'est produite
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+                
+
+                {% if message == "success" %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        creations effectue avec success
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+                
+                
+                <div class="modal fade" id="fullscreenModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered  modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Ajouter un Etablissement</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                            <div class="modal-body">
+                                <form class="row g-1 needs-validation was-validated" method="POST" action="{% url "create_ets" %}" enctype="multipart/form-data" novalidate="">
+                                    {% csrf_token %}
+                                    <div class="col-md-4 position-relative">
+                                    <label for="validationTooltip01" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="validationTooltip01" value="Lycee de Ngousso" required="" name="nom">
+                                    
+                                    </div>
+                                    <div class="col-md-4 position-relative">
+                                    <label for="validationTooltip02" class="form-label">device</label>
+                                    <input type="text" class="form-control" id="validationTooltip02" value="Doe" required="" name="devise">
+                            
+                                    </div>
+                                    <div class="col-md-4 position-relative">
+                                    <label for="validationTooltipUsername" class="form-label">Contact</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                                        <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" name="contact" required="">
+                                        
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-6 position-relative">
+                                    <label for="validationTooltip03" class="form-label">email</label>
+                                    <input type="email" class="form-control" id="validationTooltip03" required="" name="email">
+                                    </div>
+
+                                    <div class="col-md-4 position-relative">
+                                    <label for="validationTooltip04" class="form-label">site web</label>
+                                    <input type="website" class="form-control" id="validationTooltip04" required="" name="site_web">
+                                    
+                                    </div>
+
+                                    <div class="col-md-6 position-relative">
+                                        <label for="validationTooltip05" class="form-label">logo</label>
+                                        <input type="file" class="form-control" id="validationTooltip05" required="" name="logo">
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 position-relative">
+                                        <label for="validationTooltip06" class="form-label"> signature de etablissement</label>
+                                        <input type="file" class="form-control" id="validationTooltip06" required="" name="signature_ets">
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 position-relative">
+                                        <label for="validationTooltip07" class="form-label"> Cachet</label>
+                                        <input type="file" class="form-control" id="validationTooltip07" required="" name="cachet">
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 position-relative">
+                                        <label for="validationTooltip08" class="form-label"> Cachet du proviseur/principale</label>
+                                        <input type="file" class="form-control" id="validationTooltip08" required="" name="cachet_proviseur">
+                                        
+                                    </div>
+
+                                    <div class="col-md-3 position-relative">
+                                        <label for="validationTooltip09" class="form-label"> annee academique</label>
+                                        <input type="text" class="form-control" id="validationTooltip09" placeholder="2023-2024" pattern="\d{4}-\d{4}" required="" name="annee_academique">
+                                        
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit">Envoyer</button>
+                            </form>
+                            </div>
+                        
+                    </div>
+                    </div>
+                </div>
+
+
+                <!-- Table with stripped rows -->
+                <table class="table datatable table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Etablissement</th>
+                      <th scope="col">site web</th>
+                      <th scope="col">email</th>
+                      <th scope="col">annee_academique</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for etablissement in etablissements  %}
+                        <tr>
+                            <th scope="row">{{etablissement.id}}</th>
+                            <td>{{etablissement.nom}}</td>
+                            <td>{{etablissement.site_web}}</td>
+                            <td>{{etablissement.email}}</td>
+                            <td>{{etablissement.annee_academique}}</td>
+                            <td> <a href="{% url "list_projet" id_ets=etablissement.id %}"><i class="ri-share-box-line"></i></a></td>
+                        </tr>
+                        
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock content %}
+{% block javascripts %}
+    <script>
+        // Récupérer la chaîne de requête
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        const message = urlParams.get('message');
+
+        success = `
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            creations effectue avec success
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+        `
+
+        failed = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Une erreur c'est produite
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+        `
+
+        console.log(message)
+
+        if (message) {
+            if (message == "success")document.getElementById("messageContainer").innerHTML = success;
+            if (message == "failed")document.getElementById("messageContainer").innerHTML = failed;
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+    </script>
+{% endblock javascripts %}

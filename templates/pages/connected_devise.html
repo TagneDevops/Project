@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Nom de la classe</h1>
+        <nav>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item "><a href="{% url "index" %}">Accueil</a></li>
+              <li class="breadcrumb-item"><a href="{% url "list_ets" %}">creer un etablissement</a></li>
+              <li class="breadcrumb-item"><a href="#">projet</a></li>
+              <li class="breadcrumb-item active">classe</li>
+              <li class="breadcrumb-item active">devise connected</li>
+          </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <input type="hidden" value="{{id_classe}}" id="id_classe">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Appareil connecte</h5>
+                <p>
+                    Veuillez Connecter l'appareil mobile pour commencer enregistrement. <br>
+                    Appareil disponible :
+                </p>
+                <p class="devise-connected">
+
+                </p>
+                <p>
+                    <div class="next" id="next">
+
+                    </div>
+                </p>
+                
+              </div>
+            </div>
+
+  
+          </div>
+  
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+{% endblock content %}
+{% block javascripts %}
+<script src="{% static 'socket_connection.js' %}"></script>
+{% endblock javascripts %}

@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Enregistrement des eleves</h1>
+        <nav>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item "><a href="{% url "index" %}">Accueil</a></li>
+              <li class="breadcrumb-item"><a href="{% url "list_ets" %}">creer un etablissement</a></li>
+              <li class="breadcrumb-item"><a href="#">projet</a></li>
+              <li class="breadcrumb-item ">classe</li>
+              <li class="breadcrumb-item active ">recording</li>
+          </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Liste des eleves</h5>
+              <div class="d-flex justify-content-end pb-3"><button type="button" class="btn btn-primary"><i class="bi bi-arrow-repeat me-1"></i> start</button>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">nom</th>
+                    <th scope="col">photos</th>
+                    <th scope="col">statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for eleve in eleves  %}
+                    <tr>
+                        <th scope="row">{{eleve.id}}</th>
+                        <td>{{eleve.nom}}</td>
+                        <td> 
+                          {% if eleve.image == None %}
+                            <span>non disponible</span>
+                          {% else %}
+                            <a href="{{eleve.image}}"><i class="ri-share-box-line"></i></a>
+                          {% endif %}
+                        </td>
+
+                        <td>
+                          {% if eleve.statut == True %}
+                             <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> Success</span>
+                          {% else %}
+                              {% comment %} <span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i> erreur</span> {% endcomment %}
+                              <span class="badge bg-warning"><i class="bi bi-exclamation-triangle me-1"></i> en attente</span>
+                        {% endif %}
+                        </td>
+                    </tr>
+                        
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+    </section>
+  
+    </main><!-- End #main -->
+{% endblock content %}
+{% block javascripts %}
+    <script src="{% static 'manage_socket_connection.js' %}"></script>
+{% endblock javascripts %}
